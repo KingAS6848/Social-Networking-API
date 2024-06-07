@@ -8,5 +8,6 @@ const controller = new postController();
 
 postRoute.post('/',upload.single('imageURL')  ,controller.newPost);
 postRoute.get('/',controller.getAllPosts);
+postRoute.get('/:id',controller.getByPostId);
 
 export default postRoute;

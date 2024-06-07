@@ -11,6 +11,12 @@ export default class PostSchema{
         return posts;
     }
 
+    static getByID(id){
+      const post = posts.find(p=> p.id===parseInt(id));
+      return post;
+
+    }
+
     static newPost(userID,caption,imageURL){
         const newPost = new PostSchema(Date.now().toString()+88, userID,caption,imageURL);
         posts.push(newPost);

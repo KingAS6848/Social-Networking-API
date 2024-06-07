@@ -8,6 +8,17 @@ export default class postController{
       return  res.status(200).send(allPost);
     }
 
+    getByPostId(req,res){
+        const post = PostSchema.getByID(req.params.id);
+        if(post){
+            return res.status(200).send(post);
+        }
+        return  res.status(404).send({
+            success:"false",
+            message:"Product not found"
+        });
+    }
+
     newPost(req,res){
 
             const caption = req.body.caption;
@@ -17,15 +28,17 @@ export default class postController{
     
             if(newPost){
                 console.log(newPost);
-                return res.status(200).send({
+                return res.status(201).send({
                     success:"true",
                     message:"Post Created Sucessfully"
                 });
             
             }
+            
             return res.status(400).send({
                 success:"false",
                 message:"Bad Request"
             });
     }
+
 }
