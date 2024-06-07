@@ -1,3 +1,5 @@
+import UserSchema from "../User/user.model.js";
+
 export default class PostSchema{
 
     constructor(id,userID,caption,imageURL){
@@ -16,6 +18,20 @@ export default class PostSchema{
       return post;
 
     }
+
+    static getByUserEmail(userEmail) {
+         const users = UserSchema.getAll();
+         const user = users.find(u=> u.email == userEmail);
+         const userID = user.id;
+         const userPosts =[]
+
+         for(let i=0; i<posts.length; i++){
+            if(posts[i].userID == userID){
+               userPosts.push(posts[i]);
+            }
+         }
+         return userPosts;
+  }
 
     static newPost(userID,caption,imageURL){
         const newPost = new PostSchema(Date.now().toString()+88, userID,caption,imageURL);
@@ -36,13 +52,13 @@ const posts = [
     },
     {
       id: 2,
-      userID: 102,
+      userID: 2,
       caption: "Hiking adventure in the mountains",
       imageURL: "https://example.com/images/hiking.jpg"
     },
     {
       id: 3,
-      userID: 103,
+      userID: 2,
       caption: "Delicious homemade pizza",
       imageURL: "https://example.com/images/pizza.jpg"
     },

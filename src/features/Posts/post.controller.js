@@ -19,6 +19,12 @@ export default class postController{
         });
     }
 
+    getByUserId(req,res){
+        const {email} = req.query;
+        const userPosts = PostSchema.getByUserEmail(email);
+        res.send(userPosts);
+    }
+
     newPost(req,res){
 
             const caption = req.body.caption;
