@@ -16,9 +16,11 @@ const jwtMiddleware = (req,res,next)=>{
             next();
         });
 
+    }else{
+
+        return res.status(401).send("Unauthozied");
     }
 
-    return res.status(401).send("Unauthozied");
 }
 
 export default jwtMiddleware;

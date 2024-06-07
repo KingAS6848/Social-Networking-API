@@ -16,15 +16,16 @@ export default class postController{
             const newPost = PostSchema.newPost(userID,caption,imageURL);
     
             if(newPost){
-                // return res.status(201).send({
-                //     success:"true",
-                //     message:"Post Created Sucessfully"
-                // });
-            console.log(newPost);
+                console.log(newPost);
+                return res.status(200).send({
+                    success:"true",
+                    message:"Post Created Sucessfully"
+                });
+            
             }
-    
-        
-  
-
+            return res.status(400).send({
+                success:"false",
+                message:"Bad Request"
+            });
     }
 }
