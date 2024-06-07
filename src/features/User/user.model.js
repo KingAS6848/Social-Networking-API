@@ -8,17 +8,17 @@ export default class UserSchema{
     }
 
     static add(name,email,password){
-          const newUser = new UserSchema(user.length+1,name,email,password);
-          user.push(newUser);
+          const newUser = new UserSchema(users.length+1,name,email,password);
+          users.push(newUser);
           return newUser;
     }
 
     static login(email,password){
-        const userFound = user.find(e=> e.email === email && e.password === password);
+        const userFound = users.find(e=> e.email === email && e.password === password);
         
           return userFound;
 
     }
 }
 
-const user =[];
+const users =[];

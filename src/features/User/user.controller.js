@@ -1,5 +1,5 @@
 import UserSchema from "./user.model.js";
-
+import jwt from 'jsonwebtoken';
 export default class userController{
 
 
@@ -8,10 +8,16 @@ export default class userController{
     const {name,email,password} = req.body;
      const newUser = UserSchema.add(name,email,password);
      if(!newUser){
-        return res.status(400).send("Invalid Credentials");
+        return res.status(400).send({
+          success:"true",
+          message:"Invalid Credentials"
+      });
 
      }
-     return res.status(201).send(newUser);
+     return res.status(201).send({
+      success:"true",
+      message:"Account Created Sucessfully"
+  });
 
  }
 
@@ -19,9 +25,17 @@ export default class userController{
     const {email,password} = req.body;
     const userFound = UserSchema.login(email,password);
     if(!userFound){
-        return res.status(404).send("User Not Found");
+        return res.status(404).send({
+          success:"false",
+          message:"User Not Found"
+      });
     }
 
-    return res.status(200).send(userFound);
+   const token=   jwt.sign({email:userFound.email,id:userFound.id },"thisistopseceret",{expiresIn:'1h'});
+    return res.status(200).send({
+      success:"true",
+      message:"User Login Sucessfully",
+      token:token
+  });
  }
 }
